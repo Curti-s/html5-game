@@ -90,6 +90,7 @@ function moveEverything () {
         else {
             player1Score++; // must be BEFORE ballReset
              ballReset();
+            
         }
     }
     if (ballX < 0) {
@@ -102,6 +103,7 @@ function moveEverything () {
         else {
             player2Score++; //must be BEFORE ballReset
              ballReset();
+            
         }
        
     }
@@ -119,6 +121,7 @@ function moveEverything () {
 
 //function to reset the ball
 function ballReset () {
+    
     ballX = canvas.width/2;
     ballY = canvas.height/2;
     ballSpeedX = -ballSpeedX;
@@ -129,9 +132,9 @@ function winningPlayer () {
     if (player1Score == winScore){
         canvasContext.fillStyle = 'yellow';
         canvasContext.fillText("Player 1 wins" + " " + player1Score,450,400);
-       stopGame();
+        stopGame();
     }
-    else {
+    if (player2Score == winScore) {
         canvasContext.fillStyle = 'yellow';
         canvasContext.fillText("Player 2 wins" + " " + player2Score,450,400);
         stopGame();
@@ -140,8 +143,8 @@ function winningPlayer () {
 
 //function to stop the game if the winscore is reached
 function stopGame () {
-    if(winScore){
-        ballSpeedx = 0;
+    if(player1Score >= winScore || player2Score >= winScore){
+        ballSpeedX = 0;
         ballSpeedY = 0;
         canvasContext.fillStyle = 'white';
         canvasContext.fillText("GAMEOVER!...reset", 450,200);
@@ -165,6 +168,7 @@ function computerMovement () {
 function callBoth () {
     drawEverything();
     moveEverything();
+    winningPlayer();
 }
 
 //FUNCTION to calculate mouse position 
